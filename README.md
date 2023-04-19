@@ -3,19 +3,19 @@
 # author: XL
 
 
-## Project Setup
+## 初始化项目
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 运行调试
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### 打包项目
 
 ```sh
 npm run build
