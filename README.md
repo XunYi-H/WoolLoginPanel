@@ -1,8 +1,7 @@
 # wlp
-WoolLoginPanel
-author: XL
+# WoolLoginPanel
+# author: XL
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
