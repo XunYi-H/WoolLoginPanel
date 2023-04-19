@@ -2,14 +2,10 @@
   <div>
     MyMain
     <el-input /><span></span>
-    <el-input /><span></span>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-steps :active="active" finish-status="success">
-    <el-step title="Step 1" />
-    <el-step title="Step 2" />
-    <el-step title="Step 3" />
-  </el-steps>
+    <div class="flex">
+      <el-input /><span></span>
+      <el-button size="large" type=""><span>获取验证码</span></el-button>
+    </div>
   </div>
 </template>
 
@@ -19,5 +15,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+/*.el-button{
+    //height: var(--el-button-size)
+}*/
+.el-button > span {
+  align-items: center;
+  display: inline-flex;
+}
+.flex {
+  display: flex;
+}
 </style>
