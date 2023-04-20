@@ -23,12 +23,22 @@
       <el-col :xs="20" :sm="14" :md="14" :lg="14" :xl="12">
         <el-form label-width="0px">
           <el-form-item label>
-            <el-input size="large" placeholder="233" />
+            <el-input
+              size="large"
+              placeholder="手机号"
+              @change="Change_PCode"
+              v-model="this.$store.state.PCode"
+            />
           </el-form-item>
           <el-form-item label>
-            <el-input size="large" placeholder="手机号">
+            <el-input
+              size="large"
+              placeholder="验证码"
+              @change="Change_VCode"
+              v-model="this.$store.state.VCode"
+            >
               <template #append>
-                <el-button>获取验证码</el-button>
+                <el-button @click="getVCode">获取验证码</el-button>
               </template>
             </el-input>
           </el-form-item>
@@ -42,8 +52,27 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "MyMain"
+  name: "MyMain",
+  data() {
+    return {};
+  },
+  methods: {
+    Change_PCode(PCode) {
+      this.$store.commit("Change_PCode", PCode);
+      console.log(PCode);
+    },
+    Change_VCode(VCode) {
+      this.$store.commit("Change_VCode", VCode);
+      console.log(VCode);
+    },
+    async getVCode() {
+      console.log("请求");
+      const { data: res } = await axios.request("./api/notice");
+      console.log(res);
+    },
+  },
 };
 </script>
 

@@ -16,6 +16,7 @@ export default {
   name: "MyApp",
   created() {
     console.log("created 代码创建生命周期函数");
+    console.log();
   },
   components: {
     MyMain,
