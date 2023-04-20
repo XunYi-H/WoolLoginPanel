@@ -127,7 +127,7 @@ export default {
           return;
         }
       }*/
-      this.$store.commit("Change_data", '目前扫描被限制');
+      this.$store.commit("Change_data", "目前扫描被限制");
       /*const canvas = this.$refs.qrcode;
       QRCode.toCanvas(canvas, "6", function (error) {
         if (error) console.error(error);
