@@ -57,12 +57,6 @@
               >
                 <span>登录</span>
               </el-button>
-              <el-alert
-                :title="this.$store.state.data"
-                type="success"
-                center
-                effect="dark"
-              />
             </el-form>
           </el-col>
         </el-row>
@@ -80,6 +74,12 @@
         <img :src="qrCode" alt="QR Code" v-if="qrStatus" />
       </el-tab-pane>
     </el-tabs>
+    <el-alert
+      :title="this.$store.state.data"
+      type="success"
+      center
+      effect="dark"
+    />
   </div>
 </template>
 
@@ -104,9 +104,12 @@ export default {
   },
 
   methods: {
+    wait(t) {
+      return new Promise((e) => setTimeout(e, t));
+    },
     async generateQRCode() {
-      let { data: res } = await axios.get("./api/qrlogin");
-      QRCode.toDataURL(res.data.imgUrl)
+      /*let { data: qrloginres } = await axios.get("./api/qrlogin");
+      QRCode.toDataURL(qrloginres.data.imgUrl)
         .then((url) => {
           this.qrCode = url;
         })
@@ -114,6 +117,17 @@ export default {
           console.error(error);
         });
       this.qrStatus = true;
+      let qruuid = qrloginres.data.qruuid;
+      for (let i = 0; i < 30; i++) {
+        await this.wait(2000);
+        let { data: qrcheckres } = await axios.get("./api/qrcheck?" + qruuid);
+        console.log(qrcheckres);
+        if (qrcheckres.code == 202) {
+          this.$store.commit("Change_data", qrcheckres.data);
+          return;
+        }
+      }*/
+      this.$store.commit("Change_data", '目前扫描被限制');
       /*const canvas = this.$refs.qrcode;
       QRCode.toCanvas(canvas, "6", function (error) {
         if (error) console.error(error);
