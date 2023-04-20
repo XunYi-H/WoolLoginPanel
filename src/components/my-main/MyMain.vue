@@ -18,56 +18,74 @@
     <el-button size="large" style="width: 100%">
       <span>返回</span>
     </el-button>-->
-    <el-row>
-      <el-col :xs="1" :sm="5" :md="5" :lg="5" :xl="6"></el-col>
-      <el-col :xs="20" :sm="14" :md="14" :lg="14" :xl="12">
-        <el-form label-width="0px">
-          <el-form-item label>
-            <el-input
-              size="large"
-              placeholder="手机号"
-              @change="Change_PCode"
-              v-model="this.$store.state.PCode"
-            />
-          </el-form-item>
-          <el-form-item label>
-            <el-input
-              size="large"
-              placeholder="验证码"
-              @change="Change_VCode"
-              v-model="this.$store.state.VCode"
-            >
-              <template #append>
-                <el-button @click="getVCode">获取验证码</el-button>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-button
-            size="large"
-            type="primary"
-            style="width: 100%"
-            @click="doLogin"
-          >
-            <span>登录</span>
-          </el-button>
-        </el-form>
-      </el-col>
-    </el-row>
-    <el-alert
-      :title="this.$store.state.data"
-      type="success"
-      effect="dark"
-      center
-    />
+    <el-tabs v-model="activeName" class="demo-tabs" stretch>
+      <el-tab-pane label="传祺" name="first">
+        <el-row>
+          <el-col :xs="1" :sm="5" :md="5" :lg="5" :xl="6"></el-col>
+          <el-col :xs="20" :sm="14" :md="14" :lg="14" :xl="12">
+            <el-form label-width="0px">
+              <el-form-item label>
+                <el-input
+                  size="large"
+                  placeholder="手机号"
+                  @change="Change_PCode"
+                  v-model="this.$store.state.PCode"
+                />
+              </el-form-item>
+              <el-form-item label>
+                <el-input
+                  size="large"
+                  placeholder="验证码"
+                  @change="Change_VCode"
+                  v-model="this.$store.state.VCode"
+                >
+                  <template #append>
+                    <el-button
+                      @click="getVCode"
+                      :disabled="time ? true : false"
+                      >{{
+                        time ? `${time}秒后重新获取` : "获取验证码"
+                      }}</el-button
+                    >
+                  </template>
+                </el-input>
+              </el-form-item>
+              <el-button
+                size="large"
+                type="primary"
+                style="width: 100%"
+                @click="doLogin"
+              >
+                <span>登录</span>
+              </el-button>
+              <el-alert
+                :title="this.$store.state.data"
+                type="success"
+                center
+                show-icon
+                v-show="this.$store.state.data"
+                :closable="false"
+              />
+            </el-form>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="美团" name="second"></el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+
 import axios from "axios";
 export default {
   name: "MyMain",
   data() {
-    return {};
+    return {
+      time: null,
+      activeName: ref("first"),
+    };
   },
   methods: {
     Change_PCode(PCode) {
@@ -79,6 +97,16 @@ export default {
       console.log(VCode);
     },
     async getVCode() {
+      let i = 60; // 倒计时秒数
+      let t = setInterval(() => {
+        this.time = i;
+        // 60 秒倒计时结束
+        if (i === 0) {
+          clearInterval(t);
+          this.time = null;
+        }
+        i--;
+      }, 1000);
       const { data: res } = await axios.get("./api/sendcode", {
         params: {
           mobile: this.$store.state.PCode,

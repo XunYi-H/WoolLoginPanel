@@ -10,16 +10,12 @@ import { createStore } from 'vuex'
 const store = createStore({
     state() {
         return {
-            count: 0,
             PCode: null,
             VCode: null,
             data: null
         }
     },
     mutations: {
-        increment(state) {
-            state.count++
-        },
         Change_PCode(state, PCode) {
             state.PCode = PCode
         },
