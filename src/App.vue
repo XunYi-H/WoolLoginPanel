@@ -33,7 +33,7 @@ export default {
   padding: 2rem;
   display: flex;
   place-items: center;
-  //align-items: center;
+  align-items: center;
   text-align: center;
 }
 </style>

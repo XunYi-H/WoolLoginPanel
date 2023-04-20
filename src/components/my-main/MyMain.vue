@@ -42,12 +42,23 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-button size="large" type="primary" style="width: 100%">
+          <el-button
+            size="large"
+            type="primary"
+            style="width: 100%"
+            @click="doLogin"
+          >
             <span>登录</span>
           </el-button>
         </el-form>
       </el-col>
     </el-row>
+    <el-alert
+      :title="this.$store.state.data"
+      type="success"
+      effect="dark"
+      center
+    />
   </div>
 </template>
 
@@ -68,8 +79,21 @@ export default {
       console.log(VCode);
     },
     async getVCode() {
-      console.log("请求");
-      const { data: res } = await axios.request("./api/notice");
+      const { data: res } = await axios.get("./api/sendcode", {
+        params: {
+          mobile: this.$store.state.PCode,
+        },
+      });
+      console.log(res);
+    },
+    async doLogin() {
+      const { data: res } = await axios.get("./api/login", {
+        params: {
+          mobile: this.$store.state.PCode,
+          code: this.$store.state.VCode,
+        },
+      });
+      this.$store.commit("Change_data", res.data);
       console.log(res);
     },
   },

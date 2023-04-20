@@ -12,7 +12,8 @@ const store = createStore({
         return {
             count: 0,
             PCode: null,
-            VCode: null
+            VCode: null,
+            data: null
         }
     },
     mutations: {
@@ -24,6 +25,9 @@ const store = createStore({
         },
         Change_VCode(state, VCode) {
             state.VCode = VCode
+        },
+        Change_data(state, data) {
+            state.data = data
         }
 
     }
