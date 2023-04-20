@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <my-header></my-header>
-    <my-main></my-main>
+    <my-main style="margin-top: 20px"></my-main>
     <my-tip></my-tip>
   </div>
 </template>
@@ -29,11 +29,11 @@ export default {
 <style lang="less" scoped>
 .app {
   justify-content: center;
-  //margin: 0 auto;
+  margin: 0 auto;
   padding: 2rem;
   display: flex;
-  place-items: center;
-  align-items: center;
+  //place-items: center;
+  //align-items: center;
   text-align: center;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    MyTip
   </div>
 </template>
 
@@ -14,7 +13,7 @@ export default {
     startTip() {
       ElMessage({
         showClose: true,
-        message: "startTip",
+        message: "欢迎你你个叼毛",
         type: "success",
       });
       ElNotification({
@@ -36,5 +35,5 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 </style>

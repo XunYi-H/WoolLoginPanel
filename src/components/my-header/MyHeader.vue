@@ -1,8 +1,7 @@
 <template>
-  <div>MyHeader
-    
+  <div style="text-align: center">
+    <el-text tag="b"></el-text>
   </div>
-
 </template>
 
 <script>
@@ -11,5 +10,5 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 </style>

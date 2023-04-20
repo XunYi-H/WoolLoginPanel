@@ -1,6 +1,5 @@
 <template>
   <div>
-    MyMain
     <!-- <el-input size="large" />
     <span></span>
     <div class="flex">

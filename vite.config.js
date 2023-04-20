@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://127.0.1.1',
+        target: 'http://data.onecc.cc',
         changeOrigin: true,
       },
     }
