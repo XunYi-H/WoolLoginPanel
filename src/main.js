@@ -12,7 +12,7 @@ const store = createStore({
         return {
             PCode: null,
             VCode: null,
-            data: null
+            data: '变量'
         }
     },
     mutations: {

@@ -61,21 +61,31 @@
                 :title="this.$store.state.data"
                 type="success"
                 center
-                show-icon
-                v-show="this.$store.state.data"
-                :closable="false"
+                effect="dark"
               />
             </el-form>
           </el-col>
         </el-row>
       </el-tab-pane>
-      <el-tab-pane label="美团" name="second"></el-tab-pane>
+      <el-tab-pane label="美团" name="second" @click="generateQRCode()">
+        <el-button
+          size="large"
+          type="primary"
+          style="width: 100%"
+          @click="generateQRCode()"
+        >
+          <span>获取二维码</span>
+        </el-button>
+        <!--<canvas ref="qrcode"></canvas>-->
+        <img :src="qrCode" alt="QR Code" v-if="qrStatus" />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
+import QRCode from "qrcode";
 
 import axios from "axios";
 export default {
@@ -84,9 +94,32 @@ export default {
     return {
       time: null,
       activeName: ref("first"),
+      qrCode: "",
+      qrStatus: false,
     };
   },
+  created() {},
+  mounted() {
+    //this.generateQRCode();
+  },
+
   methods: {
+    async generateQRCode() {
+      let { data: res } = await axios.get("./api/qrlogin");
+      QRCode.toDataURL(res.data.imgUrl)
+        .then((url) => {
+          this.qrCode = url;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      this.qrStatus = true;
+      /*const canvas = this.$refs.qrcode;
+      QRCode.toCanvas(canvas, "6", function (error) {
+        if (error) console.error(error);
+        console.log("QRCode generated!");
+      });*/
+    },
     Change_PCode(PCode) {
       this.$store.commit("Change_PCode", PCode);
       console.log(PCode);
