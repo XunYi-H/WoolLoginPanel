@@ -1,5 +1,6 @@
 ```
 后端Json配置
+配置好后pm2 restart index.js重启后端服务
 {
     "port": 3000,
     "ql": {
